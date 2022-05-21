@@ -16,13 +16,17 @@ public class Cart {
     }
 
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        DigitalVideoDisc[] newOrder = new DigitalVideoDisc[qtyOrdered + 1];
-        for (int i = 0; i < qtyOrdered; i++) {
-            newOrder[i] = itemOrdered[i];
+        if (qtyOrdered < MAX_NUMBER_ORDERED) {
+            DigitalVideoDisc[] newOrder = new DigitalVideoDisc[qtyOrdered + 1];
+            for (int i = 0; i < qtyOrdered; i++) {
+                newOrder[i] = itemOrdered[i];
+            }
+            newOrder[qtyOrdered] = disc;
+            itemOrdered = newOrder;
+            qtyOrdered++;
+        } else {
+            System.out.println("Your cart is full, can't buy more DVD");
         }
-        newOrder[qtyOrdered] = disc;
-        itemOrdered = newOrder;
-        qtyOrdered++;
     }
 
     public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
@@ -37,22 +41,26 @@ public class Cart {
     }
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        DigitalVideoDisc[] newOrder = new DigitalVideoDisc[qtyOrdered - 1];
-        int index = 0;
-        for (int i = 0; i < qtyOrdered - 1; i++) {
-            if (disc.equals(itemOrdered[i])) {
-                index = i;
-                System.out.println("index found = " + index);
-                for (int k = index; k < qtyOrdered - 1; k++) {
-                    newOrder[k] = itemOrdered[k + 1];
+        if (qtyOrdered > 0) {
+            DigitalVideoDisc[] newOrder = new DigitalVideoDisc[qtyOrdered - 1];
+            int index = 0;
+            for (int i = 0; i <= qtyOrdered - 1; i++) {
+                if (disc.equals(itemOrdered[i])) {
+                    index = i;
+                    System.out.println("index found = " + index);
+                    for (int k = index; k < qtyOrdered - 1; k++) {
+                        newOrder[k] = itemOrdered[k + 1];
+                    }
+                    break;
+                } else {
+                    newOrder[i] = itemOrdered[i];
                 }
-                break;
-            } else {
-                newOrder[i] = itemOrdered[i];
             }
+            itemOrdered = newOrder;
+            qtyOrdered--;
+        } else {
+            System.out.println("Nothing in your cart yet!");
         }
-        itemOrdered = newOrder;
-        qtyOrdered--;
     }
 
     public float totalCost() {
