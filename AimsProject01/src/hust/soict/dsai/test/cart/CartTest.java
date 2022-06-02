@@ -16,7 +16,9 @@ public class CartTest {
         Cart.addDigitalVideoDisc(dvd3);
         Cart.print();
         Cart.searchByTitle("Star Wars");
-        Cart.removeDigitalVideoDisc(dvd2);
+        Cart.sortByCost();
+        Cart.print();
+        Cart.sortByTitle(true);
         Cart.print();
     }
 }
