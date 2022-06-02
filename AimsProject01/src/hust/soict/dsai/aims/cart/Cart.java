@@ -33,26 +33,18 @@ public class Cart {
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        addDigitalVideoDisc(dvd1);
-        addDigitalVideoDisc(dvd2);
-    }
-
     public void addDigitalVideoDisc(DigitalVideoDisc... args) {
         for (int i = 0; i < args.length; i++) {
             addDigitalVideoDisc(args[i]);
         }
     }
-// ---------------- remove DVD ----------------
+//  --------------- remove DVD ----------------
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered > 0) {
             DigitalVideoDisc[] newOrder = new DigitalVideoDisc[qtyOrdered - 1];
-            int index = 0;
             for (int i = 0; i < qtyOrdered; i++) {
                 if (disc.equals(itemOrdered[i])) {
-                    index = i;
-                    System.out.println("index of removed item found = " + index);
-                    for (int k = index; k < qtyOrdered - 1; k++) {
+                    for (int k = i; k < qtyOrdered - 1; k++) {
                         newOrder[k] = itemOrdered[k + 1];
                     }
                     break;
@@ -67,6 +59,52 @@ public class Cart {
         }
     }
 
+    public void removeDigitalVideoDisc(String title){
+        if (checkTitleValidation(title)){
+            for  (int i = 0; i < qtyOrdered; i++){
+                if (itemOrdered[i].getTitle().equalsIgnoreCase(title)){
+                    removeDigitalVideoDisc(itemOrdered[i]);
+                }
+            }
+        } else {
+            System.out.println("Invalid title");
+        }
+    }
+
+    public void removeDigitalVideoDisc(int id){
+        if (checkIdValidation(id)){
+            for  (int i = 0; i < qtyOrdered; i++){
+                if (itemOrdered[i].getId() == id){
+                    removeDigitalVideoDisc(itemOrdered[i]);
+                }
+            }
+        } else {
+            System.out.println("Invalid id!");
+        }
+    }
+
+    public boolean checkTitleValidation (String title){
+        int count = 0;
+        for (int i = 0; i < itemOrdered.length; i++){
+            if (itemOrdered[i].getTitle().equalsIgnoreCase(title)){
+                count += 1;
+                break;
+            }
+        }
+        return count != 0;
+    }
+
+    public boolean checkIdValidation (int id){
+        int count = 0;
+        for (int i = 0; i < itemOrdered.length; i++){
+            if (itemOrdered[i].getId() == id){
+                count += 1;
+                break;
+            }
+        }
+        return count != 0;
+    }
+
     public float totalCost() {
         float sum = 0;
         for (int i = 0; i < qtyOrdered; i++) {
@@ -74,12 +112,11 @@ public class Cart {
         }
         return sum;
     }
-
+    //  --------------- searching function ----------------
     public void searchByTitle(String title){
         int count = 0;
         for (int i = 0; i < itemOrdered.length; i++){
-            if (itemOrdered[i].getTitle().toUpperCase().equals(title.toUpperCase())){
-                System.out.println("Item found at index " + i);
+            if (itemOrdered[i].getTitle().equalsIgnoreCase(title)){
                 System.out.println(itemOrdered[i].toString());
                 count ++;
             }
@@ -96,7 +133,6 @@ public class Cart {
         int count  = 0;
         for (int i = 0; i < qtyOrdered; i++){
             if (itemOrdered[i].getId() == id){
-                System.out.println("Item found at index " + i);
                 System.out.println(itemOrdered[i].toString());
                 count ++;
             }
@@ -109,14 +145,29 @@ public class Cart {
         }
     }
 
+//  -------------------- sorting funcitons --------------------
     public void sortByCost(){
         DVDUtils.sortByCost(itemOrdered);
-        print();
+    }
+
+    public void sortByCost(boolean desc){
+        if (desc){
+            DVDUtils.sortByCost(itemOrdered, true);
+        } else {
+            DVDUtils.sortByCost(itemOrdered);
+        }
     }
 
     public void sortByTitle(){
         DVDUtils.sortByCost(itemOrdered);
-        print();
+    }
+
+    public void sortByTitle(boolean desc){
+        if (desc) {
+            DVDUtils.sortByTitle(itemOrdered, true);
+        } else {
+            DVDUtils.sortByTitle(itemOrdered);
+        }
     }
 
     public void print(){

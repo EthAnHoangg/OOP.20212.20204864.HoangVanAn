@@ -70,6 +70,7 @@ public class DigitalVideoDisc {
     public String getTitle() {
         return title;
     }
+
     //=============== Setter ====================
     public void setLength(int length) {
         this.length = length;
