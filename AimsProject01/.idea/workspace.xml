@@ -22,6 +22,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/hust/soict/dsai/aims/cart/Cart.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -34,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Application.DVDTest">
+  <component name="RunManager" selected="Application.Aims">
     <configuration name="Aims" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hust.soict.dsai.aims.Aims" />
       <module name="AimsProject01" />
@@ -102,10 +105,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DVDTest" />
         <item itemvalue="Application.Aims" />
-        <item itemvalue="Application.StoreTest" />
         <item itemvalue="Application.CartTest" />
+        <item itemvalue="Application.DVDTest" />
+        <item itemvalue="Application.StoreTest" />
         <item itemvalue="Application.DiskTest" />
       </list>
     </recent_temporary>
@@ -120,5 +123,20 @@
       <updated>1653650829712</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/hust/soict/dsai/aims/Store/Store.java</url>
+          <line>50</line>
+          <properties class="hust.soict.dsai.aims.Store.Store" method="checkTitleValidation">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
