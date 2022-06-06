@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.media;
 
 import java.time.LocalDate;
 
-public class Media {
+public abstract class Media {
     private int id;
     private String title;
     private String category;
@@ -10,8 +10,19 @@ public class Media {
     private static int nbMedia;
     private LocalDate dateAdded;
 
-    public int getId() {
-        return id;
+//  ============= Constructor =============
+    public Media(){}
+
+    public Media(String title, String category,  float cost) {
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
+        this.id = nbMedia;
+        nbMedia ++;
+    }
+
+//  ============ Getter ============
+    public int getId() {return id;
     }
 
     public String getTitle() {
@@ -34,6 +45,7 @@ public class Media {
         return dateAdded;
     }
 
+//  ============= Setter =============
     public void setTitle(String title) {
         this.title = title;
     }
@@ -50,5 +62,4 @@ public class Media {
         this.dateAdded = dateAdded;
     }
 
-    
 }
