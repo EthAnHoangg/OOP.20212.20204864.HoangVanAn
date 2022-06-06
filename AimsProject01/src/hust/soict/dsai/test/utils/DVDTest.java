@@ -1,37 +1,47 @@
 package hust.soict.dsai.test.utils;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
-import hust.soict.dsai.aims.utils.DVDUtils;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.utils.mediaUtils;
+import hust.soict.dsai.aims.utils.mediaUtils;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class DVDTest {
     public static void main(String[] args) {
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("AAAA", "aaaa", "aaaa", 1, 5.6f);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("BBBB", "bbbb", "bbbb", 2, 5.3f);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("CCCC", "cccc", "cccc", 3, 5f);
-        DigitalVideoDisc dvd4 = new DigitalVideoDisc("DDDD", "dddd", "dddd", 4, 7.1f);
-        DigitalVideoDisc dvd5 = new DigitalVideoDisc("EEEE", "eeee", "eeee", 5, 5.3f);
-        DigitalVideoDisc dvd6 = new DigitalVideoDisc("EEEE", "eeee", "eeee", 5, 6f);
-        DigitalVideoDisc[] dvdList = new DigitalVideoDisc[]{dvd1, dvd2, dvd3, dvd4, dvd5, dvd6};
+        Media dvd1 = new DigitalVideoDisc("AAAA", "aaaa", "aaaa", 1, 5.6f);
+        Media dvd2 = new DigitalVideoDisc("BBBB", "bbbb", "bbbb", 2, 5.3f);
+        Media dvd3 = new DigitalVideoDisc("CCCC", "cccc", "cccc", 3, 5f);
+        Media dvd4 = new DigitalVideoDisc("DDDD", "dddd", "dddd", 4, 7.1f);
+        Media dvd5 = new DigitalVideoDisc("EEEE", "eeee", "eeee", 5, 5.3f);
+        Media dvd6 = new DigitalVideoDisc("EEEE", "eeee", "eeee", 5, 6f);
+        ArrayList<Media> dvdList = new ArrayList<Media>(){
+            {
+                add(dvd1);
+                add(dvd2);
+                add(dvd3);
+                add(dvd4);
+                add(dvd5);
+                add(dvd6);
+            }
+        };
         System.out.println(dvd1.getId());
         System.out.println(dvd2.getId());
         System.out.println(dvd3.getId());
         System.out.println(dvd4.getId());
         System.out.println(dvd5.getId());
-        DVDUtils.sortByCost(dvdList);
+        mediaUtils.sortByCost(dvdList);
 
-
-        DigitalVideoDisc[] sorted = DVDUtils.sortByCost (dvdList, true);
+        ArrayList<Media> sorted = mediaUtils.sortByCost (dvdList, true);
         System.out.println("sort by cost: ");
-        for (int i = 0; i < sorted.length; i++){
-            System.out.println(sorted[i].toString());
+        for (int i = 0; i < sorted.size(); i++){
+            System.out.println(sorted.get(i).toString());
         }
 
-        sorted = DVDUtils.sortByTitle (new DigitalVideoDisc[] {dvd4, dvd2, dvd5, dvd3, dvd1, dvd6}, true);
+        sorted = mediaUtils.sortByTitle (dvdList, true);
         System.out.println("sort by title: ");
-        for (int i = 0; i < sorted.length; i++){
-            System.out.println(sorted[i].toString());
+        for (int i = 0; i < sorted.size(); i++){
+            System.out.println(sorted.get(i).toString());
         }
     }
 }

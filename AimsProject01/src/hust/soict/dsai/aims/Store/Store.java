@@ -1,21 +1,22 @@
 package hust.soict.dsai.aims.Store;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import java.util.ArrayList;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
 
 import java.util.Scanner;
 
 public class Store {
-    private DigitalVideoDisc[] itemInStore = new DigitalVideoDisc[0];
+    private ArrayList<Media> itemInStore = new ArrayList<>();
 
-    public DigitalVideoDisc[] getItemInStore() {
+    public ArrayList<Media> getItemInStore() {
         return itemInStore;
     }
 
-    public DigitalVideoDisc generatingNewDVD(){
+    public Media generatingNewMedia(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter DVD information!");
-//        System.out.println("Please enter the id");
-//        int id = sc.nextInt();
+        System.out.println("----");
         System.out.println("Please enter the DVD's title:");
         String title = sc.nextLine();
         System.out.println("Please enter the DVD's category:");
@@ -26,32 +27,27 @@ public class Store {
         int length = sc.nextInt();
         System.out.println("Please enter the DVD's cost");
         float cost = sc.nextFloat();
-
-        DigitalVideoDisc dvd = new DigitalVideoDisc(title, category, director, length, cost );
+        Media media = new DigitalVideoDisc(title, category, director, length, cost );
         System.out.println("Created DVD with the following information:");
-        System.out.println(dvd.toString());
+        System.out.println(media.toString());
         System.out.println("------------------------------------");
-        return dvd;
+        return media;
     }
 
-    public void addDVD(DigitalVideoDisc dvd){
-        int size = itemInStore.length;
-        DigitalVideoDisc[] temp_itemInStore = new DigitalVideoDisc[size + 1];
-        System.arraycopy(itemInStore, 0, temp_itemInStore, 0, size);
-        temp_itemInStore[size] = dvd;
-        itemInStore = temp_itemInStore;
+    public void addMedia(Media media){
+        itemInStore.add(media);
     }
 
-    public void addDVD (DigitalVideoDisc... args){
-        for (int i = 0; i < args.length; i++) {
-            addDVD(args[i]);
+    public void addMedia (Media... args){
+        for (Media arg : args) {
+            addMedia(arg);
         }
     }
 
     public boolean checkTitleValidation (String title){
         int count = 0;
-        for (int i = 0; i < itemInStore.length; i++){
-            if (itemInStore[i].getTitle().equalsIgnoreCase(title)){
+        for (Media media: itemInStore){
+            if (media.getTitle().equalsIgnoreCase(title)){
                 count += 1;
                 break;
             }
@@ -59,40 +55,20 @@ public class Store {
         return count != 0;
     }
 
-    public void removeDVD(String title){
-        if (checkTitleValidation(title)) {
-            int size = itemInStore.length;
-            DigitalVideoDisc[] temp_itemInStore = new DigitalVideoDisc[size - 1];
-            for (int i = 0; i < size; i++) {
-                if (itemInStore[i].getTitle().equalsIgnoreCase(title)) {
-                    for (int k = i; k < size - 1; k++) {
-                        temp_itemInStore[k] = itemInStore[k + 1];
-                    }
-                    break;
-                } else {
-                    temp_itemInStore[i] = itemInStore[i];
-                }
-            }
-            itemInStore = temp_itemInStore;
-        } else {
-            System.out.println("Invalid title!");
-        }
+    public void removeMedia(Media media){
+        itemInStore.remove(media);
     }
 
-    public void removeDVD(DigitalVideoDisc dvd){
-        int size = itemInStore.length;
-        for (int i = 0; i < size; i++){
-            if (itemInStore[i].getTitle().equalsIgnoreCase(dvd.getTitle())){
-                removeDVD(dvd.getTitle());
-            }
-        }
+    public void removeMedia(String title){
+        Media media = findMedia(title);
+        itemInStore.remove(media);
     }
 
-    public DigitalVideoDisc findDVD (String title){
+    public Media findMedia(String title){
         if (checkTitleValidation(title)){
-            for (int i = 0; i < itemInStore.length; i++){
-                if (itemInStore[i].getTitle().equalsIgnoreCase(title)){
-                    return itemInStore[i];
+            for (Media media: itemInStore){
+                if (media.getTitle().equalsIgnoreCase(title)){
+                    return media;
                 }
             }
         } else {
@@ -105,9 +81,9 @@ public class Store {
 
     public void print(){
         System.out.println("********************** Store **********************");
-        for (int i = 0; i < itemInStore.length; i++){
+        for (int i = 0; i < itemInStore.size(); i++){
             System.out.print((i+1) + " ");
-            System.out.println(itemInStore[i].toString());
+            System.out.println(itemInStore.get(i).toString());
         }
         System.out.println("***************************************************");
     }
