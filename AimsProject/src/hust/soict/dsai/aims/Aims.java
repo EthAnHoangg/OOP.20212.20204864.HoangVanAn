@@ -162,7 +162,9 @@ public class Aims {
     }
 
     public static void main(String[] args) {
-        MemoryDaemon md = new MemoryDaemon();
+//        MemoryDaemon md = new MemoryDaemon();
+        Thread md = new Thread();
+        md.setDaemon(true);
         md.run();
         Store aStore = new Store();
 //        Add some sample DVDs for testing function.

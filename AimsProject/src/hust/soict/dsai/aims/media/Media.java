@@ -62,4 +62,6 @@ public abstract class Media {
         this.dateAdded = dateAdded;
     }
 
+    public abstract String toString();
+
 }

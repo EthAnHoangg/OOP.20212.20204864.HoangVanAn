@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims;
 
-public class MemoryDaemon implements java.lang.Runnable {
+public class MemoryDaemon implements Runnable {
     private long memoryUsed = 0;
     public void run(){
         Runtime rt = Runtime.getRuntime();
@@ -14,5 +14,4 @@ public class MemoryDaemon implements java.lang.Runnable {
             }
         }
     }
-
 }

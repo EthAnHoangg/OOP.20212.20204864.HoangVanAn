@@ -5,14 +5,14 @@ import java.util.List;
 public class Book extends Media{
     private List<String> authors =  new ArrayList<String>();
 
+//  ------------ Constructor ------------
     public Book(String title, String category, float cost){
         super(title, category, cost);
     }
-
+//  ------------ Getter and setter ------------
     public List<String> getAuthors() {
         return authors;
     }
-
     public void setAuthors(List<String> authors) {
         this.authors = authors;
     }
@@ -40,5 +40,10 @@ public class Book extends Media{
         } else {
             System.out.println("Author hasn't been added!");
         }
+    }
+
+    public String toString(){
+        return "Book - " + getTitle() + " - " +  getCategory() + " - "
+                + getAuthors();
     }
 }
