@@ -1,0 +1,17 @@
+Recall:
+- Association has 2 forms: Aggregation and Composition.
+
+	+ Aggregation (weak association): "has-a" relationship between 2 classes. Although both classes are associated with each other, one can exist without the other independently.
+
+	+ Composition (strong association): "belongs-to" association as one class, for all intents and purpose belongs to another class, and exists because of it. In composition association, the classes cannot exist independently from each other. The large class is removed --> the smaller class cannot exist.
+
+!!! Aggregation can be called the superset of Composition, since all Compositions can are Aggregations but, not all Aggregations can be called Composition.
+----------------------------------------------
+Question 01: Which classes are aggregates of other classes? Checking all constructors of whole classes if they initialize for their parts?
+
+Aggregation:
+Cart - Media (Cart is an aggregate of Media)
+Store - Media (Store is an aggregate of Media)
+
+Composition:
+CompactDisc - Track (CompacDisc composes of Track)
