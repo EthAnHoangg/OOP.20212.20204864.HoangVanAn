@@ -2,7 +2,7 @@ package hust.soict.dsai.aims.media;
 
 import java.util.StringTokenizer;
 
-public class DigitalVideoDisc extends Disc implements Playable {
+public class DigitalVideoDisc extends Disc implements Playable, Comparable<DigitalVideoDisc> {
     private int id = super.getId();
     private String director;
     private int length;
@@ -69,5 +69,12 @@ public class DigitalVideoDisc extends Disc implements Playable {
     public void play(){
         System.out.println("Playing DVD: " + this.getTitle());
         System.out.println("DVD length: " + this.getLength());
+    }
+
+    public int compareTo(Object obj) {
+        if (obj instanceof DigitalVideoDisc) {
+            return compareTo((DigitalVideoDisc) obj);
+        }
+        return 0;
     }
 }

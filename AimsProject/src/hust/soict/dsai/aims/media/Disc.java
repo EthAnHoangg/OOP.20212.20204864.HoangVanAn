@@ -25,5 +25,12 @@ public class Disc extends Media{
     public int getLength() {
         return length;
     }
+    public String toString(){
+        return "Disc - " + getTitle() +  " - " +
+                getCategory() + " - " +
+                this.director +  " - " +
+                this.length + " : " +
+                getCost();
+    }
 
 }

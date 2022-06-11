@@ -67,7 +67,7 @@ public class CompactDisc extends Disc implements Playable {
 
     public String toString(){
         return "CD - " + getTitle() + " - " + getCategory() + " - "
-                + getArtist() + " - " + getDirector() + " - "
+                + " - " + getDirector() + " - "
                 + getLength() + " - " + getCost();
     }
 }
