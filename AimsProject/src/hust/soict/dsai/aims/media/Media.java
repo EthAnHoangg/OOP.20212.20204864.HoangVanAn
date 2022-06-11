@@ -64,4 +64,13 @@ public abstract class Media {
 
     public abstract String toString();
 
+    public boolean equals (Object o){
+        if (o instanceof  Media){
+            return getId() == ((Media) o).getId();
+        } else {
+            return false;
+        }
+    }
+
+
 }
