@@ -23,9 +23,8 @@ public class Track implements Playable {
         if (o instanceof Track) {
             return getTitle().equalsIgnoreCase(((Track) o).getTitle())
                     & getLength() == ((Track) o).getLength();
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void play(){

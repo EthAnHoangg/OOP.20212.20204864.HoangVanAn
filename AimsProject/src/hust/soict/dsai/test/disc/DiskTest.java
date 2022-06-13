@@ -7,7 +7,7 @@ public class DiskTest {
     public static void main(String[] args) {
         Cart anOrder = new Cart();
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
-                "Animaton", "Roger Allers", 87, 19.95f);
+                "Animation", "Roger Allers", 87, 19.95f);
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
                 "Science Fiction", "Geogre Lucas", 87, 24.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin",
@@ -20,5 +20,6 @@ public class DiskTest {
         anOrder.addMedia(dvd4);
         anOrder.searchByTitle("aladdin");
         anOrder.searchByTitle("the lion king");
+
     }
 }

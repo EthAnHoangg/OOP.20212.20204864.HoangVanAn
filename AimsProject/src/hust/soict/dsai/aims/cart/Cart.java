@@ -13,7 +13,11 @@ public class Cart {
 
     //    ---------------- add DVD ----------------
     public void addMedia(Media media) {
-        itemOrdered.add(media);
+        if (itemOrdered.contains(media)) {
+            System.out.println("Media has already added to the cart!");
+        } else{
+            itemOrdered.add(media);
+        }
     }
 
     public void addMedia(Media... args) {
@@ -106,6 +110,21 @@ public class Cart {
         }
     }
 
+    public Media findMedia(String title){
+        if (checkTitleValidation(title)){
+            for (Media media: itemOrdered){
+                if (media.getTitle().equalsIgnoreCase(title)){
+                    return media;
+                }
+            }
+        } else {
+            System.out.println("----------------");
+            System.out.println("|Invalid title!|");
+            System.out.println("----------------");
+        }
+        return null;
+    }
+
     //  -------------------- sorting funcitons --------------------
     public void sortByCost() {
         mediaUtils.sortByCost(itemOrdered);
@@ -120,7 +139,7 @@ public class Cart {
     }
 
     public void sortByTitle() {
-        mediaUtils.sortByCost(itemOrdered);
+        mediaUtils.sortByTitle(itemOrdered);
     }
 
     public void sortByTitle(boolean desc) {
@@ -130,6 +149,7 @@ public class Cart {
             mediaUtils.sortByTitle(itemOrdered);
         }
     }
+
 //  ----------- other functions -----------
     public float totalCost() {
         float sum = 0;
