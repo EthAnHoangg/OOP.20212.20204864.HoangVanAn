@@ -6,12 +6,13 @@ import static java.util.Arrays.asList;
 
 public class Book extends Media{
     private List<String> authors =  new ArrayList<>();
-
     private String content;
-    private List<String> contentTokens = asList(content.split("[\\p{Punct}\\s]+"));
-    private Map<String,Integer> wordFrequency;
+    List<String> contentTokens;
+    Map<String,Integer> wordFrequency;
 
 //  ------------ Constructor ------------
+    public Book(){};
+
     public Book(String title, String category, float cost){
         super(title, category, cost);
     }
@@ -19,6 +20,7 @@ public class Book extends Media{
     public Book(String title, String category, float cost, String content){
         super(title, category, cost);
         this.content = content;
+        processContent();
     }
 //  ------------ Getter and setter ------------
     public List<String> getAuthors() {
@@ -28,17 +30,32 @@ public class Book extends Media{
         this.authors = authors;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     public void setContent(String content) {
         this.content = content;
+        processContent();
     }
 
     public void processContent(){
-        Collections.sort(contentTokens);
+        contentTokens = asList(getContent().split("[\\p{Punct}\\s]+"));
+        wordFrequency = new TreeMap<>();
+        java.util.Collections.sort(contentTokens);
         Map<String,Integer> tmpWordFrequency = new HashMap<>();
         for (String token: contentTokens){
-            tmpWordFrequency.merge(token, 1, Integer::sum);
+            if (wordFrequency == null) {
+                wordFrequency.put(token, 1);
+            } else {
+                if (wordFrequency.get(token) == null){
+                    wordFrequency.put(token, 1);
+                } else {
+                    int value = wordFrequency.get(token);
+                    wordFrequency.put(token, value + 1);
+                }
+            }
         }
-        TreeMap<String, Integer> wordFrequency = new TreeMap<>(tmpWordFrequency);
     }
 
     public boolean checkAuthor(String authorName){
@@ -68,7 +85,7 @@ public class Book extends Media{
 
     public String toString(){
         return "Book - " + getTitle() + " - " +  getCategory() + " - "
-                + getAuthors() + " - " + contentTokens.size() +
+                + getAuthors() + " - " +  contentTokens.size() +
                 " - " + contentTokens + " - " + wordFrequency;
     }
 }
