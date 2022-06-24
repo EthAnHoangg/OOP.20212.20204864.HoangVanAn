@@ -12,26 +12,6 @@ public class AddItemToStoreScreen extends JFrame {
         this.store = store;
     }
 
-    JPanel createSouthForCD(){
-        ButtonListener btnListener = new ButtonListener();
-        JPanel south = new JPanel();
-        south.setLayout(new GridLayout(1,2));
-
-        JButton btnDelete = new JButton("Reset");
-        south.add(btnDelete);
-        btnDelete.addActionListener(btnListener);
-
-        JButton btnSubmit = new JButton("Submit");
-        south.add(btnSubmit);
-        btnSubmit.addActionListener(btnListener);
-
-        JButton btnAddTrack = new JButton("Add Track");
-        south.add(btnAddTrack);
-        btnAddTrack.addActionListener(btnListener);
-
-        return south;
-    }
-
     JPanel createNorth(){
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
@@ -93,19 +73,19 @@ public class AddItemToStoreScreen extends JFrame {
             String button = e.getActionCommand();
             switch (button) {
                 case "View store" -> {
-                    setVisible(false);
+                    dispose();
                     new StoreManagerScreen(store);
                 }
                 case "AddDVD" -> {
-                    setVisible(false);
+                    dispose();
                     new AddDigitalVideoDiscToStoreScreen(store);
                 }
                 case "AddCD" -> {
-                    setVisible(false);
+                    dispose();
                     new AddCompactDiscToStoreScreen(store);
                 }
                 case "AddBook" -> {
-                    setVisible(false);
+                    dispose();
                     new AddBookToStoreScreen(store);
                 }
             }

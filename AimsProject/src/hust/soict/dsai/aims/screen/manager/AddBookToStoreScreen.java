@@ -70,7 +70,7 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
         cost.setFont(new Font(title.getFont().getName(), Font.PLAIN, 18));
         cost.setHorizontalAlignment(SwingConstants.CENTER);
         center.add(cost);
-        tfCost = new JTextField(10);
+        tfCost = new JTextField(0+"", 10);
         center.add(tfCost);
 
         JLabel content = new JLabel("Book's content");
@@ -89,7 +89,7 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
             if (button.equals("Reset")) {
                 tfTitle.setText("");
                 tfCategory.setText("");
-                tfCost.setText("");
+                tfCost.setText("0");
                 tfContent.setText("");
             } else if (button.equals("Submit")) {
                 store.addMedia(new Book(tfTitle.getText(), tfCategory.getText()
@@ -97,14 +97,14 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
 
                 Frame f = new Frame();
                 JDialog d = new JDialog(f, "Notification");
-
-                JLabel l = new JLabel("Already add the DVD to the Store");
-
+                JLabel l = new JLabel("Already add the Book to the Store");
                 d.add(l);
-
                 d.setSize(300, 80);
-
                 d.setVisible(true);
+                tfTitle.setText("");
+                tfCategory.setText("");
+                tfCost.setText("0");
+                tfContent.setText("");
             }
         }
     }

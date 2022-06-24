@@ -113,15 +113,24 @@ public class StoreManagerScreen extends JFrame {
                     public void actionPerformed( ActionEvent e ) {
                         JFrame f = new JFrame();
                         JDialog d = new JDialog(f, "Playing");
-                        d.setLayout(new GridLayout(2,1));
-                        JLabel play = new JLabel("Playing " + ((Disc)media).getTitle());
-                        play.setHorizontalAlignment((int)CENTER_ALIGNMENT);
-                        JLabel len =  new JLabel( "Length " + ((Disc)media).getLength() + "" );
-                        len.setHorizontalAlignment((int)CENTER_ALIGNMENT);
-                        d.add(play);
-                        d.add(len);
+                        if (media instanceof DigitalVideoDisc) {
+                            d.setLayout(new GridLayout(2, 1));
+                            JLabel play = new JLabel("Playing DVD: " + ((Disc) media).getTitle());
+                            play.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            JLabel len = new JLabel("Length: " + ((Disc) media).getLength() + "");
+                            len.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            d.add(play);
+                            d.add(len);
+                        } else {
+                            d.setLayout(new GridLayout(2, 1));
+                            JLabel trackTitle = new JLabel( "Playing track: " + ((CompactDisc)media).getTracks().get(0).getTitle());
+                            trackTitle.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            JLabel trackLength = new JLabel( "Length: " + ((CompactDisc)media).getTracks().get(0).getLength() );
+                            trackLength.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            d.add(trackTitle);
+                            d.add(trackLength);
+                        }
                         d.setSize(300, 100);
-
                         d.setVisible(true);
                     }
                 });
@@ -142,19 +151,19 @@ public class StoreManagerScreen extends JFrame {
             String button = e.getActionCommand();
             switch (button) {
                 case "View store" -> {
-                    setVisible(false);
+                    dispose();
                     new StoreManagerScreen(store);
                 }
                 case "AddDVD" -> {
-                    setVisible(false);
+                    dispose();
                     new AddDigitalVideoDiscToStoreScreen(store);
                 }
                 case "AddCD" -> {
-                    setVisible(false);
+                    dispose();
                     new AddCompactDiscToStoreScreen(store);
                 }
                 case "AddBook" -> {
-                    setVisible(false);
+                    dispose();
                     new AddBookToStoreScreen(store);
                 }
             }

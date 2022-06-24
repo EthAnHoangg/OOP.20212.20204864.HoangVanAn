@@ -56,7 +56,7 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 18));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         center.add(title);
-        tfTitle = new JTextField(100);
+        tfTitle = new JTextField(8);
         center.add(tfTitle);
 
         JLabel category =  new JLabel("DVD's category: ");
@@ -76,12 +76,11 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
         center.add(tfDirector);
 
 
-
         JLabel length = new JLabel("DVD's length");
         length.setFont(new Font(title.getFont().getName(), Font.PLAIN, 18));
         length.setHorizontalAlignment(SwingConstants.CENTER);
         center.add(length);
-        tfLength = new JTextField(8);
+        tfLength = new JTextField(0+"",8);
         center.add(tfLength);
 
 
@@ -89,7 +88,7 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
         cost.setFont(new Font(title.getFont().getName(), Font.PLAIN, 18));
         cost.setHorizontalAlignment(SwingConstants.CENTER);
         center.add(cost);
-        tfCost = new JTextField(8);
+        tfCost = new JTextField(0+"",8);
         center.add(tfCost);
 
         return center;
@@ -102,21 +101,24 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
                 tfTitle.setText("");
                 tfCategory.setText("");
                 tfDirector.setText("");
-                tfCost.setText("");
-                tfLength.setText("");
+                tfCost.setText("0");
+                tfLength.setText("0");
+
             } else if (button.equals("Submit")){
                 store.addMedia(new DigitalVideoDisc(tfTitle.getText(), tfCategory.getText(), tfDirector.getText()
                         ,parseInt(tfLength.getText()), parseFloat(tfCost.getText())));
 
                 Frame f = new Frame();
                 JDialog d = new JDialog(f, "Notification");
-
                 JLabel l = new JLabel("Already add the DVD to the Store");
-
                 d.add(l);
-
                 d.setSize(300, 80);
-
+                d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                tfTitle.setText("");
+                tfCategory.setText("");
+                tfDirector.setText("");
+                tfCost.setText("0");
+                tfLength.setText("0");
                 d.setVisible(true);
             }
         }
