@@ -10,10 +10,18 @@ public class CompactDisc extends Disc implements Playable {
         return artist;
     }
 
+    public ArrayList<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(ArrayList<Track> tracks) {
+        this.tracks = tracks;
+    }
+
     public String tracksInfo (){
         String infor = "";
-        for (int i = 0; i < tracks.size(); i++){
-            infor = infor + tracks.get(i).toString();
+        for (Track track : tracks) {
+            infor = infor + track.toString();
         }
         return infor;
     }

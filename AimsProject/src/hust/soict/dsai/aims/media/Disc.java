@@ -6,7 +6,6 @@ public class Disc extends Media{
     private int length;
 
 //  ============== Constuctor ============
-
     public Disc(){}
     public Disc(String title, String category, float cost){
         super(title, category, cost);
