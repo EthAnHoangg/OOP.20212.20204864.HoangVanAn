@@ -41,7 +41,7 @@ public class TestViewStoreScreen extends Application {
         DigitalVideoDisc dvd5 = new DigitalVideoDisc("Fetch the Bolt Cutters",
                 "Science Fiction", "Geogre Lucas", 87, 24.95f);
         DigitalVideoDisc dvd6 = new DigitalVideoDisc("Future Nostalgia",
-                "Animation", 18.99f);
+                "Animation", -18.99f);
         Book book7 = new Book("The Hunger Games",
                 "Animation", 19.95f);
         Book book8 = new Book("Catching Fire",

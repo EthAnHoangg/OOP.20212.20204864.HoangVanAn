@@ -2,6 +2,7 @@ package hust.soict.dsai.aims.screen.customer.controller;
 
 import hust.soict.dsai.aims.Store.Store;
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+
+import static java.lang.Integer.parseInt;
 
 public class CartController {
     private Cart cart;
@@ -60,22 +63,40 @@ public class CartController {
     private TableView<Media> tblMedia;
 
     @FXML
+    private Label costLabel;
+
+    @FXML
     void btnRemovePressed(ActionEvent event){
         Media media = tblMedia.getSelectionModel().getSelectedItem();
         cart.removeMedia(media);
-        System.out.println(cart.toString());
+        costLabel.setText(cart.totalCost()+"");
     }
 
     @FXML
-    void btnPlayPressed(ActionEvent event) {
+    void btnPlayPressed(ActionEvent event) throws PlayerException {
         Media media = tblMedia.getSelectionModel().getSelectedItem();
-        cart.removeMedia(media);
-        System.out.println(cart.toString());
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Play");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        //Setting the content of the dialog
+        try {
+            dialog.setContentText( ((Playable)media).play());
+        } catch (PlayerException e) {
+            Dialog<String> errorDialog = new Dialog<String>();
+            errorDialog.setTitle("Error");
+            ButtonType typeError = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            errorDialog.setContentText("Error: Length is non-positive");
+            errorDialog.getDialogPane().getButtonTypes().add(typeError);
+            errorDialog.showAndWait();
+            throw new PlayerException("ERROR: DVD length is non-positive!");
+        }
+        //Adding buttons to the dialog pane
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.showAndWait();
     }
 
     @FXML
     void btnViewStorePressed(javafx.event.ActionEvent event) {
-
             final String STORE_FXML_FILE_PATH = "/hust/soict/dsai/aims/screen/customer/view/Store.fxml";
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(STORE_FXML_FILE_PATH));
             fxmlLoader.setController(new ViewStoreController(store, cart));
@@ -89,6 +110,19 @@ public class CartController {
             e.printStackTrace();
         }
     }
+    @FXML
+    void btnPlaceOrderPressed(ActionEvent event) {
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Play");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        //Setting the content of the dialog
+        dialog.setContentText("You have already place an order with the total cost \n" +
+                cart.totalCost() + "\nPress OK to confirm your request!" );
+        //Adding buttons to the dialog pane
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.showAndWait();
+    }
+
 
     public void initialize(){
         colMediaID.setCellValueFactory(
@@ -116,11 +150,7 @@ public class CartController {
                     btnRemove.setVisible(false);
                 } else {
                     btnRemove.setVisible(true);
-                    if (media instanceof Playable){
-                        btnPlay.setVisible(true);
-                    } else {
-                        btnPlay.setVisible(false);
-                    }
+                    btnPlay.setVisible(media instanceof Playable);
                 }
             }
         });
@@ -129,10 +159,28 @@ public class CartController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 showFilteredMedia(newValue);
             }
-            public void showFilteredMedia(String newValue){
-                ObservableList<Media> FilteredList =  FXCollections.observableArrayList();
-
+            public void showFilteredMedia(String newValue) {
+                ObservableList<Media> FilteredList = FXCollections.observableArrayList();
+                if (radioBtnFilterTitle.isSelected()) {
+                    for (Media media : cart.getItemOrdered()) {
+                        if (media.getTitle().contains(newValue)) {
+                            FilteredList.add(media);
+                        }
+                    }
+                } else if (radioBtnFilterId.isSelected()) {
+                    if (newValue.equals("")) {
+                        FilteredList = cart.getItemOrdered();
+                    } else {
+                        for (Media media : cart.getItemOrdered()) {
+                            if (media.getId() == parseInt(newValue)) {
+                                FilteredList.add(media);
+                            }
+                        }
+                    }
+                }
+                tblMedia.setItems(FilteredList);
             }
-            });
+        });
+        costLabel.setText(cart.totalCost()+"");
     }
 }

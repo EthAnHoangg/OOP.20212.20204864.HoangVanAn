@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox prefHeight="100.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -65,7 +65,7 @@
                   <Insets top="10.0" />
                </padding>
                <children>
-                  <Button fx:id="btnPlay" mnemonicParsing="false" prefWidth="60.0" text="Play" />
+                  <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#btnPlayPressed" prefWidth="60.0" text="Play" />
                   <Button fx:id="btnRemove" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
                </children>
             </HBox>
@@ -82,14 +82,14 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label text="0 $">
+                  <Label fx:id="costLabel" text="0 $">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" style="-fx-font-family: Archivo; -fx-background-color: linear-gradient(from 0.0% 100.0% to 0.0% 0.0%, #051c68 0.0%, #051c68 0.6711%, #051aff 100.0%)linear-gradient(from 0.0% 100.0% to 0.0% 0.0%, #051c68 0.0%, #051c68 0.6711%, #051aff 100.0%);" text="Place Order" textFill="WHITE" />
+            <Button fx:id="placeOrderButton" mnemonicParsing="false" onAction="#btnPlaceOrderPressed" style="-fx-font-family: Archivo; -fx-background-color: linear-gradient(from 0.0% 100.0% to 0.0% 0.0%, #051c68 0.0%, #051c68 0.6711%, #051aff 100.0%)linear-gradient(from 0.0% 100.0% to 0.0% 0.0%, #051c68 0.0%, #051c68 0.6711%, #051aff 100.0%);" text="Place Order" textFill="WHITE" />
          </children>
       </VBox>
    </bottom>

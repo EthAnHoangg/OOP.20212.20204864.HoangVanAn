@@ -2,19 +2,20 @@ package hust.soict.dsai.aims.screen.customer.controller;
 
 import hust.soict.dsai.aims.Store.Store;
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 public class ItemController {
     private Media media;
     private Store store;
-    private Cart cart;
+    private Cart cart = new Cart();
     @FXML
     private Button btnAddToCart;
 
@@ -33,11 +34,30 @@ public class ItemController {
     }
 
     @FXML
-    void btnPlayClicked(ActionEvent event) {
-
+    void btnPlayClicked(ActionEvent event) throws PlayerException {
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Play");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        //Setting the content of the dialog
+        try {
+            dialog.setContentText( ((Playable)media).play());
+            //Adding buttons to the dialog pane
+            dialog.getDialogPane().getButtonTypes().add(type);
+            dialog.showAndWait();
+        } catch (PlayerException e) {
+            Dialog<String> errorDialog = new Dialog<String>();
+            errorDialog.setTitle("Error");
+            ButtonType typeError = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            errorDialog.setContentText("Error: Length is non-positive");
+            errorDialog.getDialogPane().getButtonTypes().add(typeError);
+            errorDialog.showAndWait();
+            throw new PlayerException("ERROR: DVD length is non-positive!");
+        }
     }
-    public void setData(Media media){
+    public void setData(Media media,Cart cart,Store store){
         this.media = media;
+        this.store = store;
+        this.cart = cart;
         lblTitle.setText(media.getTitle());
         lblCost.setText(media.getCost()+"$");
         if (media instanceof Playable){

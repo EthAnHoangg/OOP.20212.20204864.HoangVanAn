@@ -2,6 +2,7 @@ package hust.soict.dsai.aims;
 
 import hust.soict.dsai.aims.Store.Store;
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
@@ -159,7 +160,11 @@ public class Aims {
                     System.out.println("Enter the title of the media you want to play");
                     String title4 = sc.nextLine();
                     Media media_play = aCart.findMedia(title4);
-                    ((Playable) media_play).play();
+                    try {
+                        System.out.println(((Playable) media_play).play());
+                    } catch (PlayerException e){
+                        e.printStackTrace();
+                    }
                 }
                 case 5 -> {
                     System.out.println("An order is created!");
@@ -202,7 +207,11 @@ public class Aims {
                     System.out.println("Enter the title of the media you want to play");
                     String title4 = sc.nextLine();
                     Media media_play = aStore.findMedia(title4);
-                    ((Playable) media_play).play();
+                    try {
+                        System.out.println(((Playable) media_play).play());
+                    } catch (PlayerException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }
