@@ -12,6 +12,7 @@ public class Painter extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Painter.class.getResource("Painter.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
+
         stage.setTitle("Painter");
         stage.setScene(scene);
         stage.show();
