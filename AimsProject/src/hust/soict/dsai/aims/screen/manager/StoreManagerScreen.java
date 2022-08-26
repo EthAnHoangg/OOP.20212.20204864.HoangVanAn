@@ -116,17 +116,17 @@ public class StoreManagerScreen extends JFrame {
                         if (media instanceof DigitalVideoDisc) {
                             d.setLayout(new GridLayout(2, 1));
                             JLabel play = new JLabel("Playing DVD: " + ((Disc) media).getTitle());
-                            play.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            play.setHorizontalAlignment(0);
                             JLabel len = new JLabel("Length: " + ((Disc) media).getLength() + "");
-                            len.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            len.setHorizontalAlignment(0);
                             d.add(play);
                             d.add(len);
                         } else {
                             d.setLayout(new GridLayout(2, 1));
                             JLabel trackTitle = new JLabel( "Playing track: " + ((CompactDisc)media).getTracks().get(0).getTitle());
-                            trackTitle.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            trackTitle.setHorizontalAlignment(0);
                             JLabel trackLength = new JLabel( "Length: " + ((CompactDisc)media).getTracks().get(0).getLength() );
-                            trackLength.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+                            trackLength.setHorizontalAlignment(0);
                             d.add(trackTitle);
                             d.add(trackLength);
                         }

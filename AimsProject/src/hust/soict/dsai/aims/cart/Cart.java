@@ -1,13 +1,18 @@
 package hust.soict.dsai.aims.cart;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.utils.mediaUtils;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
-    private ArrayList<Media> itemOrdered = new ArrayList<Media>();
+    private ObservableList<Media> itemOrdered = FXCollections.observableArrayList();
 
-    public ArrayList<Media> getItemOrdered() {
+    public ObservableList<Media> getItemOrdered() {
         return itemOrdered;
     }
 
@@ -30,7 +35,6 @@ public class Cart {
     public void removeMedia(Media media) {
         itemOrdered.remove(media);
     }
-
     public void removeMedia(String title) {
         if (checkTitleValidation(title)) {
             for (Media media: itemOrdered) {
@@ -42,7 +46,6 @@ public class Cart {
             System.out.println("Invalid title");
         }
     }
-
     public void removeMedia(int id) {
         if (checkIdValidation(id)) {
             for (Media media: itemOrdered) {

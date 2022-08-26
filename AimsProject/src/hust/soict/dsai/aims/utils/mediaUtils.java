@@ -1,6 +1,7 @@
 package hust.soict.dsai.aims.utils;
 
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,6 @@ public class mediaUtils {
         return mediaList;
     }
 
-
     public static ArrayList<Media> sortByCost (ArrayList<Media> mediaList, boolean desc) {
         for (int i = 0; i < mediaList.size() - 1; i++) {
             for (int j = i + 1; j < mediaList.size(); j++) {
@@ -92,6 +92,82 @@ public class mediaUtils {
     }
 
     public static ArrayList<Media> sortByTitle (ArrayList<Media> mediaList, boolean desc){
+        for (int i = 0; i < mediaList.size() - 1; i++) {
+            for (int j = i+1; j < mediaList.size(); j++) {
+                if (mediaList.get(j).getTitle().compareToIgnoreCase(mediaList.get(i).getTitle()) > 0){
+                    Media temp = mediaList.get(j);
+                    mediaList.set(j, mediaList.get(i));
+                    mediaList.set(i, temp);
+                } else if (mediaList.get(j).getTitle().compareToIgnoreCase(mediaList.get(i).getTitle()) == 0) {
+                    if (compareByCost(mediaList.get(j), mediaList.get(i)).getCost() > mediaList.get(i).getCost()){
+                        Media temp = mediaList.get(j);
+                        mediaList.set(j, mediaList.get(i));
+                        mediaList.set(i, temp);
+                    }
+                }
+            }
+        }
+        return mediaList;
+    }
+
+    public static ObservableList<Media> sortByCost (ObservableList<Media> mediaList){
+        for (int i = 0; i < mediaList.size() - 1; i++){
+            for (int j = i + 1; j < mediaList.size(); j++){
+                if (mediaList.get(j).getCost() < mediaList.get(i).getCost()){
+                    Media temp = mediaList.get(j);
+                    mediaList.set(j, mediaList.get(i));
+                    mediaList.set(i, temp);
+                } else if  (mediaList.get(j).getCost() == mediaList.get(i).getCost()){
+                    if (compareByTitle(mediaList.get(j), mediaList.get(i)).getTitle().equalsIgnoreCase(mediaList.get(j).getTitle())){
+                        Media temp = mediaList.get(j);
+                        mediaList.set(j, mediaList.get(i));
+                        mediaList.set(i, temp);
+                    }
+                }
+            }
+        }
+        return mediaList;
+    }
+
+    public static ObservableList<Media> sortByCost (ObservableList<Media> mediaList, boolean desc) {
+        for (int i = 0; i < mediaList.size() - 1; i++) {
+            for (int j = i + 1; j < mediaList.size(); j++) {
+                if (mediaList.get(j).getCost() > mediaList.get(i).getCost()) {
+                    Media temp = mediaList.get(j);
+                    mediaList.set(j, mediaList.get(i));
+                    mediaList.set(i, temp);
+                } else if (mediaList.get(j).getCost() == mediaList.get(i).getCost()) {
+                    if (compareByTitle(mediaList.get(j), mediaList.get(i)).getTitle().equalsIgnoreCase(mediaList.get(j).getTitle())) {
+                        Media temp = mediaList.get(j);
+                        mediaList.set(j, mediaList.get(i));
+                        mediaList.set(i, temp);
+                    }
+                }
+            }
+        }
+        return mediaList;
+    }
+
+    public static ObservableList<Media> sortByTitle (ObservableList<Media> mediaList){
+        for (int i = 0; i < mediaList.size() - 1; i++) {
+            for (int j = i+1; j < mediaList.size(); j++) {
+                if (mediaList.get(j).getTitle().compareToIgnoreCase(mediaList.get(i).getTitle()) < 0){
+                    Media temp = mediaList.get(j);
+                    mediaList.set(j, mediaList.get(i));
+                    mediaList.set(i, temp);
+                } else if (mediaList.get(j).getTitle().compareToIgnoreCase(mediaList.get(i).getTitle()) == 0) {
+                    if (compareByCost(mediaList.get(j), mediaList.get(i)).getCost() > mediaList.get(i).getCost()){
+                        Media temp = mediaList.get(j);
+                        mediaList.set(j, mediaList.get(i));
+                        mediaList.set(i, temp);
+                    }
+                }
+            }
+        }
+        return mediaList;
+    }
+
+    public static ObservableList<Media> sortByTitle (ObservableList<Media> mediaList, boolean desc){
         for (int i = 0; i < mediaList.size() - 1; i++) {
             for (int j = i+1; j < mediaList.size(); j++) {
                 if (mediaList.get(j).getTitle().compareToIgnoreCase(mediaList.get(i).getTitle()) > 0){

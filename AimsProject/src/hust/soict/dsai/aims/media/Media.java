@@ -22,8 +22,8 @@ public abstract class Media implements Comparable<Media> {
         this.title = title;
         this.category = category;
         this.cost = cost;
-        this.id = nbMedia;
         nbMedia ++;
+        this.id = nbMedia;
     }
 
 //  ============ Getter ============
